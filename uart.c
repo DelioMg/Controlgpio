@@ -6,8 +6,12 @@ int main() {
 
     char comando[1024];
 
-    printf("Sistema iniciado. Aguardando comandos pela serial...\n");
-
+    while (!stdio_usb_connected()) {
+        sleep_ms(100); 
+    }
+    printf("Conexão Serial realizada com sucesso!\n");
+    printf("Digite o comando:\n");
+    
     while (true) {
    
         if (scanf("%1023s", comando) == 1) {
