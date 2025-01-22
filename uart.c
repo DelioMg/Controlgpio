@@ -1,12 +1,15 @@
-#include <stdio.h>
 #include "pico/stdlib.h"
+#include <stdio.h>
+#include "hardware/pwm.h"
 
 #define LED_VERDE 11
 #define LED_AZUL 12
 #define LED_VERMELHO 13
 #define BUZZER 21
 
-void init_gpio() {
+uint slice_num;
+
+void setup() {
     gpio_init(LED_VERDE);
     gpio_set_dir(LED_VERDE, GPIO_OUT);
     gpio_init(LED_AZUL);
@@ -15,6 +18,11 @@ void init_gpio() {
     gpio_set_dir(LED_VERMELHO, GPIO_OUT);
     gpio_init(BUZZER);
     gpio_set_dir(BUZZER, GPIO_OUT);
+    gpio_set_function(BUZZER, GPIO_FUNC_PWM);      
+    slice_num = pwm_gpio_to_slice_num(BUZZER); 
+    pwm_set_clkdiv(slice_num, 125.0);                  
+    pwm_set_wrap(slice_num, 255); 
+
 }
 
 void desligar_todos_leds() {
@@ -23,9 +31,16 @@ void desligar_todos_leds() {
     gpio_put(LED_VERMELHO, 0);
 }
 
+void tocar_buzzer(){
+    pwm_set_gpio_level(BUZZER, 50);              
+    pwm_set_enabled(slice_num, true);                  
+    sleep_ms(250);                                    
+    pwm_set_enabled(slice_num, false);                 
+}
+
 int main() {
     stdio_init_all();
-    init_gpio();
+    setup();
     desligar_todos_leds();
 
     char comando[1024];
@@ -62,7 +77,7 @@ int main() {
             desligar_todos_leds();
             printf("Todos Leds Desligados \n");
         } else if (strcmp(comando, "BU" ) == 0) {
-            //acionar_buzzer_por_2s();
+            tocar_buzzer();
             printf("Buzzer acionado \n");
         } else {
             printf("Comando inválido: %s\n", comando);

@@ -81,9 +81,14 @@ target_include_directories(uart PRIVATE
   ${CMAKE_CURRENT_LIST_DIR}
 )
 
+# Include hardware PWM header
+target_include_directories(uart PRIVATE 
+  ${PICO_SDK_PATH}/src/rp2_common/hardware_pwm/include
+)
+
 # Add any user requested libraries
 target_link_libraries(uart 
-        
+        hardware_pwm
         )
 
 pico_add_extra_outputs(uart)
