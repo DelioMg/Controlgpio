@@ -72,7 +72,7 @@ Este programa permite controlar LEDs e o buzzer do Raspberry Pi Pico via comunic
 
 Confira o vídeo abaixo demonstrando o funcionamento do controle dos LEDs e do buzzer:
 
-[![Demonstração do Projeto](https://youtube.com/shorts/MOCVOxUHFyU?si=UTxs3IZqPIVvZkiY)
+[![Demonstração do Projeto](https://img.youtube.com/vi/MOCVOxUHFyU/0.jpg)](https://youtube.com/shorts/MOCVOxUHFyU?si=UTxs3IZqPIVvZkiY)
 
 ## Estrutura do Código
 
@@ -80,3 +80,4 @@ Confira o vídeo abaixo demonstrando o funcionamento do controle dos LEDs e do b
 - **`desligar_todos_leds()`**: Desliga todos os LEDs.
 - **`tocar_buzzer()`**: Emite um sinal sonoro utilizando o buzzer.
 - **`main()`**: Loop principal que aguarda comandos via UART e executa as ações correspondentes.
+
