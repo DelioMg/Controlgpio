@@ -1,11 +1,13 @@
 #include "pico/stdlib.h"
 #include <stdio.h>
 #include "hardware/pwm.h"
+#include "hardware/uart.h"
 
 #define LED_VERDE 11
 #define LED_AZUL 12
 #define LED_VERMELHO 13
 #define BUZZER 21
+
 
 uint slice_num;
 
@@ -34,7 +36,7 @@ void desligar_todos_leds() {
 void tocar_buzzer(){
     pwm_set_gpio_level(BUZZER, 50);              
     pwm_set_enabled(slice_num, true);                  
-    sleep_ms(250);                                    
+    sleep_ms(2000);                                    
     pwm_set_enabled(slice_num, false);                 
 }
 
